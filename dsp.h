@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#define MAT_SIZ 19  // 物品种类列表的长度
+#define MAT_SIZ 22  // 物品种类列表的长度
 
 typedef enum {  // 物品种类
     none = 0,
@@ -12,12 +12,15 @@ typedef enum {  // 物品种类
     silicon_ore,
     kimberlite_ore,
     spiniform_stalagmite_ore,
+    curde_oil,
+    hydrogen,
 
     iron_ingot,
     copper_ingot,
     high_purity_silicon,
     diamond,
     carbon_nanotube,
+    refined_oil,
 
     circuit_board,
     microcrystalline_component,
@@ -31,18 +34,22 @@ typedef enum {  // 物品种类
 
 char* item_name[] = {
     "none",
+
     "coal_ore",
     "iron_ore",
     "copper_ore",
     "silicon_ore",
     "kimberlite_ore",
     "spiniform_stalagmite_ore",
+    "curde_oil",
+    "hydrogen",
 
     "iron_ingot",
     "copper_ingot",
     "high_purity_silicon",
     "diamond",
     "carbon_nanotube",
+    "refined_oil",
 
     "circuit_board",
     "microcrystalline_component",
@@ -101,7 +108,16 @@ recipe_t recipe_list[] = {  // 公式表
         1.0,
         {{none, 0}}
     },
-
+    {
+        {{curde_oil, 1}},
+        1.0,
+        {{none, 0}}
+    },
+    {
+        {{hydrogen, 1}},
+        1.0,
+        {{none, 0}}
+    },
 
     {
         {{iron_ingot, 1}},
@@ -128,7 +144,11 @@ recipe_t recipe_list[] = {  // 公式表
         4.0,
         {{spiniform_stalagmite_ore, 2}}
     },
-
+    {
+        {{refined_oil, 2}, {hydrogen, 1}},
+        4.0,
+        {{curde_oil, 2}}
+    },
     
     {
         {{circuit_board, 2}},

@@ -1,4 +1,3 @@
-#include <omp.h>
 #include <stdio.h>
 
 #include "dsp.h"
@@ -8,7 +7,7 @@ typedef enum {
     exclusion = -1,
     speedup = 1,
     extra = 2
-} request;
+} request_t;
 
 // 设置需求列表中的一项(列表指针, 产物id, 需求多少)
 void set_need_vec_val(Mat* p, item_t product, double num) {
@@ -57,7 +56,7 @@ void print_cargo_list(double* cargo_list) {
 }
 
 // 遍历设置列表，修改配方矩阵
-void request_recipe_mat(int* request_list, Mat* p_recipe_mat) {
+void request_recipe_mat(request_t* request_list, Mat* p_recipe_mat) {
     for (int i = 0; i < MAT_SIZ; i++) {
         switch (request_list[i]) {
             case exclusion:
@@ -125,7 +124,7 @@ void init_recipe_mat(Mat* p_recipe_mat, item_t target_byproduct) {
     }
 }
 
-void solve(double* result_list, double* need_list, int* request_list, item_t target_byproduct) {
+void solve(double* result_list, double* need_list, request_t* request_list, item_t target_byproduct) {
     // 创建需求向量
     Mat need_vec;
     MatCreate(&need_vec, 1, MAT_SIZ);
@@ -167,19 +166,17 @@ void solve(double* result_list, double* need_list, int* request_list, item_t tar
 }
 
 int main(void) {
-    double time0 = omp_get_wtime();
-
     // 创建需求列表
     double need_list[MAT_SIZ] = {0.0};
 
     // 创建设置列表，包括了增产/加速/排除等信息
-    int request_list[MAT_SIZ] = {0};
+    request_t request_list[MAT_SIZ] = {0};
 
     // 创建氢来源变量，这个是默认值，别改这里的，要改去测试用例里直接覆盖，还有测试用例不检查错误
     item_t hydrogen_source = hydrogen;
 
     // 几个测试用例，可以自己加或者修改
-#define TEST 2
+#define TEST 5
 
 #if TEST == 1
     need_list[processor] = 60;                // 需求60处理器
@@ -201,6 +198,33 @@ int main(void) {
         request_list[i] = extra;
     }
     request_list[qwq] = exclusion;  // 排除增产剂
+
+#elif TEST == 4
+    need_list[white_matrix] = 10000;  // 万糖
+
+#elif TEST == 5
+    // 测试5没有验算，太麻烦了，不过前四个测试算出来都没问题
+    // 需求10000喷了自喷涂蓝增产剂的白糖，按最低卡顿（不太确定）增产剂设置
+    need_list[orz] = 10000;
+
+    request_list[blue_matrix] = extra;
+    request_list[red_matrix] = speedup;
+    request_list[yellow_matrix] = extra;
+    request_list[purple_matrix] = extra;
+    request_list[green_matrix] = extra;
+    request_list[white_matrix] = extra;
+
+    request_list[processor] = extra;
+    request_list[quantum_chip] = extra;
+    request_list[gravition_lens] = extra;
+
+    request_list[proliferator_mk3] = extra;
+
+    for (item_t i = none; i <= proliferator_mk3; i++) {  // 将所有其他的产线设置为加速
+        if (request_list[i] == 0) {
+            request_list[i] = speedup;
+        }
+    }
 #endif
 
     puts("need:");
@@ -216,9 +240,6 @@ int main(void) {
         solve(result_list, need_list, request_list, hydrogen_source);  // 把备用氢来源作为副产物重新求解
 
     // 输出结果
-    double time1 = omp_get_wtime();
-    printf("time = %lf s\n", time1 - time0);
-
     puts("result:");
     print_cargo_list(result_list);
     putchar('\n');

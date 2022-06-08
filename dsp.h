@@ -2,7 +2,7 @@
 
 #include <stdint.h>
 
-#define MAT_SIZ 57  // 物品种类列表的长度
+#define MAT_SIZ 59  // 物品种类列表的长度
 
 typedef enum {  // 物品种类
     none = 0,
@@ -48,6 +48,7 @@ typedef enum {  // 物品种类
     titanium_crystal,
     partical_container,
     casimir_crystal,
+    photon_combiner,
 
     processor,
     partical_boardband,
@@ -55,6 +56,8 @@ typedef enum {  // 物品种类
     quantum_chip,
     strange_matter,
     gravition_lens,
+
+    solar_sail,
 
     blue_matrix,
     red_matrix,
@@ -114,6 +117,7 @@ char* item_name[] = {
     "titanium_crystal",
     "partical_container",
     "casimir_crystal",
+    "photon_combiner",
 
     "processor",
     "partical_boardband",
@@ -121,6 +125,8 @@ char* item_name[] = {
     "quantum_chip",
     "strange_matter",
     "gravition_lens",
+
+    "solar_sail",
 
     "blue_matrix",
     "red_matrix",
@@ -351,6 +357,11 @@ recipe_t recipe_list[] = {  // 公式表
         4.0,
         {{optical_grating_crystal, 4}, {graphene, 2}, {hydrogen, 12}}
     },
+    {
+        {{photon_combiner, 1}},
+        3.0,
+        {{optical_grating_crystal, 1}, {circuit_board, 1}}
+    },
 
     {
         {{processor, 1}},
@@ -381,6 +392,11 @@ recipe_t recipe_list[] = {  // 公式表
         {{gravition_lens, 1}},
         6.0,
         {{diamond, 4}, {strange_matter, 1}}
+    },
+    {
+        {{solar_sail, 2}},
+        4.0,
+        {{photon_combiner, 1}, {graphene, 1}}
     },
 
     {

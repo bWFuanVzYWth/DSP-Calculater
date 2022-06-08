@@ -225,6 +225,16 @@ int main(void) {
             request_list[i] = speedup;
         }
     }
+#elif TEST == 6
+    need_list[solar_sail] = 468000;
+
+    for (item_t i = none; i <= proliferator_mk3; i++) {  // 将所有产线设置为加速
+        if (request_list[i] == 0) {
+            request_list[i] = speedup;
+        }
+    }
+    request_list[qwq] = exclusion;  // 排除增产剂
+
 #endif
 
     puts("need:");

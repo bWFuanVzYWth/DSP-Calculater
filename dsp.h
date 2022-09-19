@@ -289,7 +289,7 @@ recipe_t recipe_list[] = {  // 公式表
     {
         {{carbon_nanotube, 2}},
         4.0,
-        {{spiniform_stalagmite_ore, 2}}
+        {{spiniform_stalagmite_ore, 6}}
     },
     {
         {{refined_oil, 2}, {hydrogen, 1}},
@@ -355,7 +355,7 @@ recipe_t recipe_list[] = {  // 公式表
     {
         {{casimir_crystal, 1}},
         4.0,
-        {{optical_grating_crystal, 4}, {graphene, 2}, {hydrogen, 12}}
+        {{optical_grating_crystal, 8}, {graphene, 2}, {hydrogen, 12}}
     },
     {
         {{photon_combiner, 1}},

@@ -176,13 +176,9 @@ int main(void) {
     item_t hydrogen_source = hydrogen;
 
     // 几个测试用例，可以自己加或者修改
-#define TEST 5
+#define TEST 4
 
 #if TEST == 1
-    need_list[processor] = 60;                // 需求60处理器
-    request_list[circuit_board] = exclusion;  // 排除电路板
-
-#elif TEST == 2
     need_list[qwq] = 1488;                               // 需求1488自喷涂蓝增产剂
     for (item_t i = none; i <= proliferator_mk2; i++) {  // 将除了蓝增产剂外的产线设置为加速，蓝增产剂设置为增产
         if (i == proliferator_mk3)
@@ -190,7 +186,7 @@ int main(void) {
         else
             request_list[i] = speedup;
     }
-#elif TEST == 3
+#elif TEST == 2
     need_list[refined_oil] = 120;                        // 需求120油
     need_list[hydrogen] = 30;                            // 需求120氢
     hydrogen_source = refined_oil;                       // 将备用氢来源设置为油
@@ -199,41 +195,17 @@ int main(void) {
     }
     request_list[qwq] = exclusion;  // 排除增产剂
 
-#elif TEST == 4
+#elif TEST == 3
     need_list[white_matrix] = 10000;  // 万糖
 
-#elif TEST == 5
-    // 测试5没有验算，太麻烦了，不过前四个测试算出来都没问题
-    // 需求10000喷了自喷涂蓝增产剂的白糖，按最低卡顿（不太确定）增产剂设置
-    need_list[orz] = 10000;
-
-    request_list[blue_matrix] = extra;
-    request_list[red_matrix] = speedup;
-    request_list[yellow_matrix] = extra;
-    request_list[purple_matrix] = extra;
-    request_list[green_matrix] = extra;
-    request_list[white_matrix] = extra;
-
-    request_list[processor] = extra;
-    request_list[quantum_chip] = extra;
-    request_list[gravition_lens] = extra;
-
-    request_list[proliferator_mk3] = extra;
+#elif TEST == 4
+    need_list[orz] = 1000;  // 纯增产千糖
 
     for (item_t i = none; i <= proliferator_mk3; i++) {  // 将所有其他的产线设置为加速
         if (request_list[i] == 0) {
-            request_list[i] = speedup;
+            request_list[i] = extra;
         }
     }
-#elif TEST == 6
-    need_list[solar_sail] = 468000;
-
-    for (item_t i = none; i <= proliferator_mk3; i++) {  // 将所有产线设置为加速
-        if (request_list[i] == 0) {
-            request_list[i] = speedup;
-        }
-    }
-    request_list[qwq] = exclusion;  // 排除增产剂
 
 #endif
 

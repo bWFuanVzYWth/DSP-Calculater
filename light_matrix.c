@@ -21,8 +21,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define MAT_LEGAL_CHECKING
-
 #define min(a, b) ((a) > (b) ? (b) : (a))
 #define equal(a, b) ((a - b) < 1e-15 && (a - b) > -(1e-15))
 

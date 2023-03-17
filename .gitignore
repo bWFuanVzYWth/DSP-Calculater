@@ -1,1 +1,12 @@
 .vscode/
+
+*.exe
+
+*.txt
+*.json
+*.csv
+
+*.zip
+*.rar
+*.7z
+*.tar.gz
